@@ -1,47 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pokédex - Upgrade Stats</title>
+    <title>Upgrade Stats</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
 <body class="bg-light">
-
 <div class="container mt-4">
-
-    <h1 class="text-center mb-3">Upgrade Stats</h1>
+    <h1 class="text-center">Upgrade Stats</h1>
     <a href="/{{ username }}/dashboard" class="btn btn-dark mb-3">⬅ Back</a>
 
+    <div class="alert alert-info">XP: {{ xp }}</div>
+
     {% if message %}
-        <div class="alert alert-info">{{ message }}</div>
+        <div class="alert alert-warning">{{ message }}</div>
     {% endif %}
 
-    <div class="card p-3 shadow mb-4">
-        <h3>Your XP: {{ xp }}</h3>
-    </div>
+    <h3>Upgrade Pokémon Attack (+3)</h3>
+    {% if pokemon|length == 0 %}
+        <div class="alert alert-secondary">You have no Pokémon yet. Open a chest first.</div>
+        <button class="btn btn-primary w-100" disabled>Upgrade Attack</button>
+    {% else %}
+        <form method="POST">
+            <input type="hidden" name="stat" value="attack">
+            <select name="pokemon" class="form-select mb-2">
+                {% for p in pokemon %}
+                    <option value="{{ p.name }}">
+                        {{ p.name }} (ATK: {{ p.attack }})
+                        — Cost: {{ 8 + 8 * (p.attack_upgrades|default(0)) }} XP
+                    </option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-primary w-100">Upgrade Attack</button>
+        </form>
+    {% endif %}
 
-    <div class="row">
+    <hr>
 
-        {% for s, val in stats.items() %}
-            <div class="col-md-4 mb-4">
-                <div class="card p-3 shadow">
-                    <h3>{{ s.capitalize() }}</h3>
-                    <p>Level: {{ val }}</p>
+    <h3>Upgrade Pokémon Health (+8)</h3>
+    {% if pokemon|length == 0 %}
+        <div class="alert alert-secondary">You have no Pokémon yet. Open a chest first.</div>
+        <button class="btn btn-success w-100" disabled>Upgrade Health</button>
+    {% else %}
+        <form method="POST">
+            <input type="hidden" name="stat" value="health">
+            <select name="pokemon" class="form-select mb-2">
+                {% for p in pokemon %}
+                    <option value="{{ p.name }}">
+                        {{ p.name }} (HP: {{ p.hp }}/{{ p.max_hp }})
+                        — Cost: {{ 10 + 10 * (p.health_upgrades|default(0)) }} XP
+                    </option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-success w-100">Upgrade Health</button>
+        </form>
+    {% endif %}
 
-                    <form method="POST">
-                        <input type="hidden" name="stat" value="{{ s }}">
-                        <button class="btn btn-primary w-100">
-                            Upgrade (Cost: {{ val * 10 }} XP)
-                        </button>
-                    </form>
+    <hr>
 
-                </div>
-            </div>
-        {% endfor %}
-
-    </div>
-
+    <h3>Upgrade Player Luck</h3>
+    <form method="POST">
+        <input type="hidden" name="stat" value="luck">
+        <button class="btn btn-warning w-100">
+            Upgrade Luck (Current: {{ stats.luck }})
+        </button>
+    </form>
 </div>
-
 </body>
 </html>

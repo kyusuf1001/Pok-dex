@@ -20,7 +20,7 @@
             <div class="card p-3 shadow">
                 <h3>Keys</h3>
                 <ul class="list-group">
-                    {% for k, amount in inv.keys.items() %}
+                    {% for k, amount in inv['keys'].items() %}
                         <li class="list-group-item d-flex justify-content-between">
                             <strong>{{ k.capitalize() }} Key</strong>
                             <span>{{ amount }}</span>
@@ -35,7 +35,7 @@
             <div class="card p-3 shadow">
                 <h3>Potions</h3>
                 <ul class="list-group">
-                    {% for p, amount in inv.potions.items() %}
+                    {% for p, amount in inv['potions'].items() %}
                         <li class="list-group-item d-flex justify-content-between">
                             <strong>{{ p.capitalize() }} Potion</strong>
                             <span>{{ amount }}</span>

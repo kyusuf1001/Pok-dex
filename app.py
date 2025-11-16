@@ -1,16 +1,48 @@
 from flask import Flask, render_template, request, redirect, url_for
-import os
-import json
 
 # Import logic files
-from logic.inventory_logic import load_users, save_users, get_inventory
+from logic.upgrade_logic import upgrade_attack, upgrade_health, upgrade_luck
+from logic.inventory_logic import load_users, get_inventory
 from logic.pokemon_logic import get_pokemon_list, get_pokemon, set_active_pokemon, get_active_pokemon
 from logic.chest_logic import open_chest
-from logic.shop_logic import buy_key, buy_chest, buy_potion
+from logic.shop_logic import buy_key, buy_potion, KEY_PRICES, POTION_PRICES
 from logic.battle_logic import apply_damage, heal_active, reward_for_win
 
 app = Flask(__name__)
 
+@app.route("/<username>/upgrades", methods=["GET", "POST"])
+def upgrades(username):
+    username = username.lower()
+    users = load_users()
+    pokes = users[username]["pokemon"]  # direct list
+
+    message = None
+
+    if request.method == "POST":
+        stat = request.form.get("stat")
+
+        if stat == "luck":
+            success, message = upgrade_luck(username)
+
+        elif stat in ("attack", "health"):
+            p_name = request.form.get("pokemon")
+            if stat == "attack":
+                success, message = upgrade_attack(username, p_name)
+            else:
+                success, message = upgrade_health(username, p_name)
+
+        # reload users/pokes so XP & lists are fresh after upgrade
+        users = load_users()
+        pokes = users[username]["pokemon"]
+
+    return render_template(
+        "upgrade_stats.html",
+        username=username,
+        pokemon=pokes,
+        stats=users[username]["stats"],
+        xp=users[username]["xp"],
+        message=message
+    )
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -56,16 +88,20 @@ def shop(username):
 
         if item == "key":
             success, message = buy_key(username, type_)
-        elif item == "chest":
-            success, message = buy_chest(username, type_)
         elif item == "potion":
             success, message = buy_potion(username, type_)
 
     users = load_users()
     money = users[username]["money"]
 
-    return render_template("shop.html", username=username, money=money, message=message)
-
+    return render_template(
+        "shop.html",
+        username=username,
+        money=money,
+        message=message,
+        key_prices=KEY_PRICES,
+        potion_prices=POTION_PRICES
+    )
 @app.route("/<username>/chests", methods=["GET", "POST"])
 def chests(username):
     username = username.lower()
@@ -131,29 +167,6 @@ def battle(username):
     active = get_active_pokemon(username)
 
     return render_template("battle_helper.html", username=username, active=active, message=message)
-
-@app.route("/<username>/upgrades", methods=["GET", "POST"])
-def upgrades(username):
-    username = username.lower()
-    users = load_users()
-
-    message = None
-
-    if request.method == "POST":
-        stat = request.form.get("stat")
-
-        # cost increases with each stat level
-        cost = users[username]["stats"][stat] * 10
-
-        if users[username]["xp"] < cost:
-            message = "Not enough XP!"
-        else:
-            users[username]["xp"] -= cost
-            users[username]["stats"][stat] += 1
-            save_users(users)
-            message = f"{stat.capitalize()} upgraded!"
-
-    return render_template("upgrade_stats.html", username=username, stats=users[username]["stats"], xp=users[username]["xp"], message=message)
 
 if __name__ == "__main__":
     app.run(debug=True)

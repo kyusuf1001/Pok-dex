@@ -1,91 +1,46 @@
 import json
 import os
+from logic.inventory_logic import load_users, save_users
 
-DATA_PATH = os.path.join("data", "users.json")
-
-
-# -------------------- Load & Save --------------------
-
-def load_users():
-    with open(DATA_PATH, "r") as f:
-        return json.load(f)
+USERS_PATH = os.path.join("data", "users.json")
 
 
-def save_users(data):
-    with open(DATA_PATH, "w") as f:
-        json.dump(data, f, indent=4)
-
-
-# -------------------- Rarity Ranking --------------------
-
-RARITY_ORDER = {
-    "legendary": 5,
-    "mythic": 4,
-    "epic": 3,
-    "rare": 2,
-    "common": 1
-}
-
-
-# -------------------- Get All Pokémon --------------------
+# -------------------- Load Pokémon List --------------------
 
 def get_pokemon_list(username):
-    username = username.lower()
     users = load_users()
-
-    pokemon_list = users[username]["pokemon"]
-
-    # Sort: legendary > mythic > epic > rare > common
-    pokemon_list = sorted(
-        pokemon_list,
-        key=lambda p: RARITY_ORDER.get(p["rarity"], 0),
-        reverse=True
-    )
-
-    return pokemon_list
-
-
-# -------------------- Get Pokémon Details --------------------
-
-def get_pokemon(username, pokemon_name):
     username = username.lower()
+    return users[username]["pokemon"]
+
+
+def get_pokemon(username, name):
     users = load_users()
+    username = username.lower()
 
     for p in users[username]["pokemon"]:
-        if p["name"].lower() == pokemon_name.lower():
+        if p["name"].lower() == name.lower():
             return p
 
     return None
 
 
-# -------------------- Set Active Pokémon --------------------
+# -------------------- Active Pokémon --------------------
 
 def set_active_pokemon(username, pokemon_name):
-    username = username.lower()
     users = load_users()
+    username = username.lower()
 
     for p in users[username]["pokemon"]:
         if p["name"].lower() == pokemon_name.lower():
-            users[username]["active_pokemon"] = p["name"]
+            users[username]["active_pokemon"] = p
             save_users(users)
-            return True, f"Active Pokémon set to {p['name']}."
+            return True, "Active Pokémon updated!"
 
     return False, "Pokémon not found."
 
 
-# -------------------- Get Active Pokémon --------------------
-
 def get_active_pokemon(username):
-    username = username.lower()
     users = load_users()
+    username = username.lower()
 
-    active = users[username]["active_pokemon"]
-
-    if not active:
-        return None
-
-    for p in users[username]["pokemon"]:
-        if p["name"] == active:
-            return p
-
-    return None
+    return users[username]["active_pokemon"]

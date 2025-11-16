@@ -2,32 +2,57 @@
     "yusuf": {
         "inventory": {
             "keys": {
-                "wooden": 2,
+                "wooden": 0,
                 "iron": 0,
                 "gold": 0,
                 "mythic": 0,
                 "ultimate": 0
             },
             "potions": {
-                "heal": 0,
+                "heal": 1,
                 "xp": 0
             }
         },
-        "money": 0,
-        "xp": 0,
+        "money": 50,
+        "xp": 1,
         "stats": {
             "attack": 1,
             "health": 1,
-            "luck": 1
+            "luck": 2
         },
-        "pokemon": [],
-        "active_pokemon": null
+        "pokemon": [
+            {
+                "name": "Stormhorn",
+                "type": "Electric",
+                "rarity": "epic",
+                "level": 1,
+                "hp": 88,
+                "max_hp": 88,
+                "attack": 22,
+                "defense": 12,
+                "moves": [],
+                "attack_upgrades": 2,
+                "health_upgrades": 1
+            }
+        ],
+        "active_pokemon": {
+            "name": "Stormhorn",
+            "type": "Electric",
+            "rarity": "epic",
+            "level": 1,
+            "hp": 60,
+            "max_hp": 80,
+            "attack": 16,
+            "defense": 12,
+            "moves": [],
+            "attack_upgrades": 0,
+            "health_upgrades": 0
+        }
     },
-
     "ayah": {
         "inventory": {
             "keys": {
-                "wooden": 2,
+                "wooden": 1,
                 "iron": 0,
                 "gold": 0,
                 "mythic": 0,
@@ -48,11 +73,10 @@
         "pokemon": [],
         "active_pokemon": null
     },
-
     "maryam": {
         "inventory": {
             "keys": {
-                "wooden": 2,
+                "wooden": 1,
                 "iron": 0,
                 "gold": 0,
                 "mythic": 0,
@@ -73,11 +97,10 @@
         "pokemon": [],
         "active_pokemon": null
     },
-
     "zakky": {
         "inventory": {
             "keys": {
-                "wooden": 2,
+                "wooden": 1,
                 "iron": 0,
                 "gold": 0,
                 "mythic": 0,

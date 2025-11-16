@@ -1,93 +1,59 @@
-import json
 import os
+import json
 from logic.inventory_logic import load_users, save_users, add_key, add_potion
 
 DATA_PATH = os.path.join("data", "users.json")
 
-
-# -------------------- Shop Prices --------------------
-
-PRICES = {
-    "keys": {
-        "wooden": 10,
-        "iron": 25,
-        "gold": 50,
-        "mythic": 100,
-        "ultimate": 200
-    },
-
-    "chests": {
-        "wooden": 15,
-        "iron": 40,
-        "gold": 80,
-        "mythic": 150,
-        "ultimate": 300
-    },
-
-    "potions": {
-        "heal": 20,
-        "xp": 30
-    }
+KEY_PRICES = {
+    "wooden": 10,
+    "iron": 25,
+    "gold": 50,
+    "mythic": 100,
+    "ultimate": 200
 }
 
-
-# -------------------- Buy Key --------------------
+POTION_PRICES = {
+    "heal": 15,
+    "xp": 25
+}
 
 def buy_key(username, key_type):
-    username = username.lower()
     users = load_users()
+    username = username.lower()
 
-    if key_type not in PRICES["keys"]:
+    if key_type not in KEY_PRICES:
         return False, "Invalid key type."
 
-    cost = PRICES["keys"][key_type]
+    cost = KEY_PRICES[key_type]
+    money = users[username]["money"]
 
-    if users[username]["money"] < cost:
-        return False, "Not enough money."
+    if money < cost:
+        return False, f"Not enough money. A {key_type} key costs {cost} coins."
 
+    # Buy successful
     users[username]["money"] -= cost
-    add_key(username, key_type)
+    add_key(users, username, key_type, 1)
     save_users(users)
 
-    return True, f"Purchased {key_type} key for {cost} coins."
+    return True, f"Bought 1 {key_type.capitalize()} Key for {cost} coins!"
 
-
-# -------------------- Buy Chest --------------------
-
-def buy_chest(username, chest_type):
-    username = username.lower()
-    users = load_users()
-
-    if chest_type not in PRICES["chests"]:
-        return False, "Invalid chest type."
-
-    cost = PRICES["chests"][chest_type]
-
-    if users[username]["money"] < cost:
-        return False, "Not enough money."
-
-    users[username]["money"] -= cost
-    save_users(users)
-
-    return True, f"Purchased a {chest_type} chest for {cost} coins."
-
-
-# -------------------- Buy Potion --------------------
 
 def buy_potion(username, potion_type):
-    username = username.lower()
     users = load_users()
+    username = username.lower()
 
-    if potion_type not in PRICES["potions"]:
+    if potion_type not in POTION_PRICES:
         return False, "Invalid potion type."
 
-    cost = PRICES["potions"][potion_type]
+    cost = POTION_PRICES[potion_type]
+    money = users[username]["money"]
 
-    if users[username]["money"] < cost:
-        return False, "Not enough money."
+    if money < cost:
+        return False, f"Not enough money. A {potion_type.capitalize()} Potion costs {cost} coins."
 
+    # Buy successful
     users[username]["money"] -= cost
-    add_potion(username, potion_type)
+    add_potion(users, username, potion_type, 1)
     save_users(users)
 
-    return True, f"Purchased {potion_type} potion for {cos_
+    return True, f"Bought 1 {potion_type.capitalize()} Potion for {cost} coins!"
