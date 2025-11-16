@@ -1,0 +1,29 @@
+{
+    "common": [
+        {"name": "Pikachu", "type": "Electric"},
+        {"name": "Tailix", "type": "Normal"},
+        {"name": "Seedlet", "type": "Grass"},
+        {"name": "Splashu", "type": "Water"}
+    ],
+
+    "rare": [
+        {"name": "Flametail", "type": "Fire"},
+        {"name": "Aquabite", "type": "Water"},
+        {"name": "Windora", "type": "Flying"}
+    ],
+
+    "epic": [
+        {"name": "Stormhorn", "type": "Electric"},
+        {"name": "Frozion", "type": "Ice"}
+    ],
+
+    "mythic": [
+        {"name": "Shadowfyre", "type": "Dark"},
+        {"name": "Mystifern", "type": "Magic"}
+    ],
+
+    "legendary": [
+        {"name": "Aurelion", "type": "Light"},
+        {"name": "Drakonis", "type": "Dragon"}
+    ]
+}

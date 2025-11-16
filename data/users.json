@@ -1,0 +1,101 @@
+{
+    "yusuf": {
+        "inventory": {
+            "keys": {
+                "wooden": 2,
+                "iron": 0,
+                "gold": 0,
+                "mythic": 0,
+                "ultimate": 0
+            },
+            "potions": {
+                "heal": 0,
+                "xp": 0
+            }
+        },
+        "money": 0,
+        "xp": 0,
+        "stats": {
+            "attack": 1,
+            "health": 1,
+            "luck": 1
+        },
+        "pokemon": [],
+        "active_pokemon": null
+    },
+
+    "ayah": {
+        "inventory": {
+            "keys": {
+                "wooden": 2,
+                "iron": 0,
+                "gold": 0,
+                "mythic": 0,
+                "ultimate": 0
+            },
+            "potions": {
+                "heal": 0,
+                "xp": 0
+            }
+        },
+        "money": 0,
+        "xp": 0,
+        "stats": {
+            "attack": 1,
+            "health": 1,
+            "luck": 1
+        },
+        "pokemon": [],
+        "active_pokemon": null
+    },
+
+    "maryam": {
+        "inventory": {
+            "keys": {
+                "wooden": 2,
+                "iron": 0,
+                "gold": 0,
+                "mythic": 0,
+                "ultimate": 0
+            },
+            "potions": {
+                "heal": 0,
+                "xp": 0
+            }
+        },
+        "money": 0,
+        "xp": 0,
+        "stats": {
+            "attack": 1,
+            "health": 1,
+            "luck": 1
+        },
+        "pokemon": [],
+        "active_pokemon": null
+    },
+
+    "zakky": {
+        "inventory": {
+            "keys": {
+                "wooden": 2,
+                "iron": 0,
+                "gold": 0,
+                "mythic": 0,
+                "ultimate": 0
+            },
+            "potions": {
+                "heal": 0,
+                "xp": 0
+            }
+        },
+        "money": 0,
+        "xp": 0,
+        "stats": {
+            "attack": 1,
+            "health": 1,
+            "luck": 1
+        },
+        "pokemon": [],
+        "active_pokemon": null
+    }
+}

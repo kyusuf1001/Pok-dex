@@ -1,0 +1,165 @@
+/* ------------------------------
+   Global Page Styling
+--------------------------------*/
+
+body {
+    background-color: #f8f8f8;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Centered container defaults */
+.container {
+    max-width: 1100px;
+}
+
+
+/* ------------------------------
+   Headers
+--------------------------------*/
+
+h1, h2, h3, h4 {
+    font-family: "Trebuchet MS", sans-serif;
+    letter-spacing: 1px;
+}
+
+
+/* ------------------------------
+   Cards (like Pokémon Cards)
+--------------------------------*/
+
+.card {
+    border-radius: 15px;
+    border: 2px solid #e0e0e0;
+    background-color: white;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
+
+
+/* ------------------------------
+   Buttons
+--------------------------------*/
+
+.btn {
+    border-radius: 12px !important;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #3b4cca;
+    border-color: #3b4cca;
+}
+
+.btn-primary:hover {
+    background-color: #2d3db5;
+}
+
+.btn-danger {
+    background-color: #cc0000;
+    border-color: #cc0000;
+}
+
+.btn-danger:hover {
+    background-color: #aa0000;
+}
+
+.btn-warning {
+    background-color: #ffcb05;
+    border-color: #ffcb05;
+    color: black;
+}
+
+.btn-warning:hover {
+    background-color: #e0b300;
+}
+
+.btn-success {
+    background-color: #4caf50;
+}
+
+.btn-dark {
+    background-color: #333;
+}
+
+.btn-secondary {
+    background-color: #888;
+}
+
+/* Big dashboard buttons */
+.btn.p-3 {
+    font-size: 1.2rem;
+}
+
+
+/* ------------------------------
+   Chest Colors (Optional Styling)
+--------------------------------*/
+
+.wooden-chest {
+    background: #8b5a2b;
+    color: white;
+}
+
+.iron-chest {
+    background: #b0b0b0;
+    color: black;
+}
+
+.gold-chest {
+    background: #ffd700;
+    color: black;
+}
+
+.mythic-chest {
+    background: linear-gradient(45deg, purple, magenta);
+    color: white;
+}
+
+.ultimate-chest {
+    background: linear-gradient(45deg, red, yellow, blue, green);
+    color: white;
+}
+
+
+/* ------------------------------
+   Pokémon Detail Styling
+--------------------------------*/
+
+.pokemon-header {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+.pokemon-stat {
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
+
+
+/* ------------------------------
+   Battle Helper Input
+--------------------------------*/
+
+input[type="number"], input[type="text"], select {
+    height: 45px;
+    font-size: 1.1rem;
+}
+
+
+/* ------------------------------
+   Alerts
+--------------------------------*/
+
+.alert {
+    font-size: 1.1rem;
+    border-radius: 12px;
+}
+

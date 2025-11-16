@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokédex - Pokémon Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-4">
+
+    <a href="/{{ username }}/pokemon" class="btn btn-dark mb-3">⬅ Back</a>
+
+    <div class="card p-4 shadow">
+
+        <h1>{{ p.name }}</h1>
+        <hr>
+
+        <p><strong>Type:</strong> {{ p.type }}</p>
+        <p><strong>Rarity:</strong> {{ p.rarity }}</p>
+        <p><strong>HP:</strong> {{ p.hp }} / {{ p.max_hp }}</p>
+        <p><strong>Attack:</strong> {{ p.attack }}</p>
+        <p><strong>Defense:</strong> {{ p.defense }}</p>
+        <p><strong>Luck:</strong> {{ p.luck }}</p>
+        <p><strong>Level:</strong> {{ p.level }}</p>
+
+        <h3 class="mt-4">Moves</h3>
+        <ul>
+            {% if p.moves|length == 0 %}
+                <li>No moves assigned yet.</li>
+            {% else %}
+                {% for m in p.moves %}
+                    <li>{{ m }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
+        <a class="btn btn-success w-100 mt-3"
+           href="/{{ username }}/set_active/{{ p.name }}">
+            Set as Active Pokémon
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
